@@ -3,6 +3,14 @@ from rest_framework import generics
 from products.models import Product
 from products.serializers import ProductSerializer
 
+from . import client
+
+class SearchListView(generics.GenericAPIView):
+    def get(self, request, *args, **kwargs):
+        query = request.GET.get('q')
+        results = client.perform_search(query)
+        return 
+
 class SearchListView(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer

@@ -6,7 +6,6 @@ class UserPublicSerializer(serializers.Serializer):
     other_products = serializers.SerializerMethodField(read_only=True)
 
     def get_other_products(self, obj):
-        print(obj)
         user = obj
         my_products = user.product_set.all()
         return []

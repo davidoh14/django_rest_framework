@@ -161,6 +161,6 @@ REST_FRAMEWORK = {
 
 ALGOLIA = {
     'APPLICATION_ID': '6BX84Q14M0',
-    'API_KEY': '',
+    'API_KEY': os.environ.get('ALGOLIA_API_KEY'),
     'INDEX_PREFIX': 'cfe',
 }
