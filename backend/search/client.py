@@ -7,7 +7,7 @@ def get_client():
 
 def get_index(index_name='cfe_Product'):
     client = get_client()
-    index = client.init_index('cfe_Product')
+    index = client.init_index(index_name)
     return index
 
 
