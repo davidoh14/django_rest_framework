@@ -41,6 +41,14 @@ class Product(models.Model):
     
     def get_tags_list(self):
         return [random.choice(TAGS_MODEL_VALUES)]
+    
+    @property
+    def path(self):
+        return f"/products/{self.pk}/"
+
+    @property
+    def body(self):
+        return self.content
 
     @property
     def sale_price(self):
