@@ -2,6 +2,7 @@ django-dotenv
 algoliasearch-django>=2.0,<3.0
 django>=4.1.0,<4.2
 djangorestframework
+djangorestframework-simplejwt
 pyyaml
 requests
 django-cors-headers
