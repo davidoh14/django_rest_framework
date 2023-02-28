@@ -65,7 +65,19 @@ function handleSearch(event) {
         return response.json()
     })
     .then(data => {
-        writeToContainer(data)
+        const validData = isTokenNotValid(data)
+        if (validData && contentContainer) {
+            contentContainer.innerHTML = ""
+            if (data && data.hits) {
+                let htmlStr = ""
+                for (let result of data.hits) {
+                    htmlStr += "<li>" + result.title + "</li>"
+                }
+                contentContainer.innerHTML = htmlStr
+            }
+        } else {
+            contentContainer.innerHTML = "<p>No results found</p>"
+        }
     })
     .catch(err => {
         console.log('err', err)
@@ -140,3 +152,27 @@ function getProductList() {
 }
 
 validateJWTToken()
+
+const algoliaID = ''
+const algoliaSearchAPIKey = ''
+const searchClient = algoliasearch(algoliaID, algoliaSearchAPIKey);
+
+const search = instantsearch({
+  indexName: 'cfe_Product',
+  searchClient,
+});
+
+search.addWidgets([
+  instantsearch.widgets.searchBox({
+    container: '#searchbox',
+  }),
+
+  instantsearch.widgets.hits({
+    container: '#hits',
+    templates: {
+        item: `<div>{{ title }}<p>\${{price}}</p></div>`
+    }
+  })
+]);
+
+search.start();
